@@ -1,4 +1,10 @@
 #!/bin/bash
+
+export CXXFLAGS="$CXXFLAGS -std=gnu++17"
+export CFLAGS="$CFLAGS -std=gnu17"
+export TARGET_CXXFLAGS="$TARGET_CXXFLAGS -std=gnu++17"
+export TARGET_CFLAGS="$TARGET_CFLAGS -std=gnu17"
+
 #
 # https://github.com/P3TERX/Actions-OpenWrt
 # File name: diy-part2.sh
