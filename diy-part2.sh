@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# 修复 gn 编译问题 - 强制使用 C++17 标准
+export HOST_CXXFLAGS="$HOST_CXXFLAGS -std=c++17"
+export HOST_CFLAGS="$HOST_CFLAGS -std=c17"
+export CXXFLAGS="$CXXFLAGS -std=c++17"
+export CFLAGS="$CFLAGS -std=c17"
+
+# 可选：使用 g++ 代替 clang++（更稳定）
+export HOST_CXX=g++
+
 #
 # https://github.com/P3TERX/Actions-OpenWrt
 # File name: diy-part2.sh
