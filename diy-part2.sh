@@ -1,13 +1,23 @@
 #!/bin/bash
 
-# 修复 gn 编译问题 - 强制使用 C++17 标准
+# ============================================
+# 修复编译环境问题
+# ============================================
+
+# 1. 使用 GCC 代替 Clang（解决编译器/库不兼容）
+export CC=gcc
+export CXX=g++
+export HOST_CC=gcc
+export HOST_CXX=g++
+
+# 2. 强制使用 C++17 标准（解决 C++20 兼容性问题）
 export HOST_CXXFLAGS="$HOST_CXXFLAGS -std=c++17"
 export HOST_CFLAGS="$HOST_CFLAGS -std=c17"
 export CXXFLAGS="$CXXFLAGS -std=c++17"
 export CFLAGS="$CFLAGS -std=c17"
 
-# 可选：使用 g++ 代替 clang++（更稳定）
-export HOST_CXX=g++
+# 3. 增加编译并行数（可选，加快编译）
+export MAKE_JOBS="-j$(nproc)"
 
 #
 # https://github.com/P3TERX/Actions-OpenWrt
