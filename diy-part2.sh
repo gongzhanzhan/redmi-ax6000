@@ -19,22 +19,34 @@
 # 设置主路由静态IP
 # sed -i 's/192.168.1.1/192.168.6.1/g' package/base-files/files/bin/config_generate
 
-# 设置密码为空
-sed -i '/CYXluq4wUazHjmCDBCqXF/d' package/lean/default-settings/files/zzz-default-settings
+# 删除默认密码设置（如果文件存在）
+if [ -f package/lean/default-settings/files/zzz-default-settings ]; then
+    sed -i '/CYXluq4wUazHjmCDBCqXF/d' package/lean/default-settings/files/zzz-default-settings
+    echo "已删除默认密码配置"
+else
+    echo "警告: zzz-default-settings 文件不存在，跳过密码修改"
+fi
 
-# 安装新主题 luci-theme-bootstrap-mod
-# git clone https://github.com/leshanydy2022/luci-theme-bootstrap-mod.git package/lean/luci-theme-bootstrap-mod
-# sed -i 's/luci-theme-bootstrap/luci-theme-bootstrap-mod/g' feeds/luci/collections/luci/Makefile
-
-# 安装luci-app-smartdns和luci-app-adguardhome
-# rm -rf feeds/luci/applications/luci-app-smartdns
+# 安装 luci-app-adguardhome
+echo "正在安装 luci-app-adguardhome..."
 rm -rf feeds/luci/applications/luci-app-adguardhome
-# git clone https://github.com/leshanydy2022/luci-app-smartdns.git feeds/luci/applications/luci-app-smartdns
-git clone https://github.com/leshanydy2022/luci-app-adguardhome.git package/lean/luci-app-adguardhome
+rm -rf package/lean/luci-app-adguardhome
+git clone git://github.com/leshanydy2022/luci-app-adguardhome.git package/lean/luci-app-adguardhome
+if [ $? -eq 0 ]; then
+    echo "luci-app-adguardhome 安装成功"
+else
+    echo "错误: luci-app-adguardhome 安装失败"
+fi
 
-# 为adguardhome插件更换最新的版本
+# 更新 adguardhome 核心
+echo "正在更新 adguardhome 核心..."
 rm -rf feeds/packages/net/adguardhome
-git clone https://github.com/leshanydy2022/adguardhome.git feeds/packages/net/adguardhome
+git clone git://github.com/leshanydy2022/adguardhome.git feeds/packages/net/adguardhome
+if [ $? -eq 0 ]; then
+    echo "adguardhome 核心更新成功"
+else
+    echo "错误: adguardhome 核心更新失败"
+fi
 
 # 安装uugamebooster
 # rm -rf feeds/luci/applications/luci-app-uugamebooster
