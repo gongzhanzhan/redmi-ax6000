@@ -1,15 +1,24 @@
 #!/bin/bash
 
-export CC=gcc
-export CXX=g++
-export HOST_CC=gcc
-export HOST_CXX=g++
-export CFLAGS="-std=c17"
-export CXXFLAGS="-std=c++20"
-export HOST_CFLAGS="-std=c17"
-export HOST_CXXFLAGS="-std=c++20"
+# 设置编译器版本（只定义一次）
+export CC=gcc-12
+export CXX=g++-12
+export HOST_CC=gcc-12
+export HOST_CXX=g++-12
 
-echo "编译环境已配置：强制C17，C++20"
+# 设置 C 和 C++ 标准（使用 C++17 而不是 C++20）
+export CFLAGS="-std=c17"
+export CXXFLAGS="-std=c++17"
+export HOST_CFLAGS="-std=c17"
+export HOST_CXXFLAGS="-std=c++17"
+
+# 安装缺失的依赖
+sudo apt-get install curl python3 perl pkg-config libssl-dev
+
+# 清理失败的构建目录
+rm -rf /workdir/openwrt/build_dir/target-aarch64_cortex-a53_musl/host/rustc-1.90.0-src
+rm -rf /workdir/openwrt/build_dir/hostpkg/gn-*
+
 
 #
 # https://github.com/P3TERX/Actions-OpenWrt
