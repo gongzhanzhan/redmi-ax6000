@@ -4,20 +4,16 @@
 # 修复编译环境问题
 # ============================================
 
-# 1. 使用 GCC 代替 Clang（解决编译器/库不兼容）
 export CC=gcc
 export CXX=g++
 export HOST_CC=gcc
 export HOST_CXX=g++
+export CFLAGS="-std=c17"
+export CXXFLAGS="-std=c++20"
+export HOST_CFLAGS="-std=c17"
+export HOST_CXXFLAGS="-std=c++20"
 
-# 2. 强制使用 C++17 标准（解决 C++20 兼容性问题）
-export HOST_CXXFLAGS="$HOST_CXXFLAGS -std=c++17"
-export HOST_CFLAGS="$HOST_CFLAGS -std=c17"
-export CXXFLAGS="$CXXFLAGS -std=c++17"
-export CFLAGS="$CFLAGS -std=c17"
-
-# 3. 增加编译并行数（可选，加快编译）
-export MAKE_JOBS="-j$(nproc)"
+echo "编译环境已配置：强制C17，C++20"
 
 #
 # https://github.com/P3TERX/Actions-OpenWrt
