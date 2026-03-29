@@ -1,4 +1,16 @@
 #!/bin/bash
+
+export CC=gcc
+export CXX=g++
+export HOST_CC=gcc
+export HOST_CXX=g++
+export CFLAGS="-std=c17"
+export CXXFLAGS="-std=c++20"
+export HOST_CFLAGS="-std=c17"
+export HOST_CXXFLAGS="-std=c++20"
+
+echo "编译环境已配置：强制C17，C++20"
+
 #
 # https://github.com/P3TERX/Actions-OpenWrt
 # File name: diy-part1.sh
