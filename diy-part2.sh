@@ -1,10 +1,5 @@
 #!/bin/bash
 
-export CXXFLAGS="$CXXFLAGS -std=gnu++17"
-export CFLAGS="$CFLAGS -std=gnu17"
-export TARGET_CXXFLAGS="$TARGET_CXXFLAGS -std=gnu++17"
-export TARGET_CFLAGS="$TARGET_CFLAGS -std=gnu17"
-
 #
 # https://github.com/P3TERX/Actions-OpenWrt
 # File name: diy-part2.sh
@@ -31,27 +26,6 @@ if [ -f package/lean/default-settings/files/zzz-default-settings ]; then
     echo "已删除默认密码配置"
 else
     echo "警告: zzz-default-settings 文件不存在，跳过密码修改"
-fi
-
-# 安装 luci-app-adguardhome
-echo "正在安装 luci-app-adguardhome..."
-rm -rf feeds/luci/applications/luci-app-adguardhome
-rm -rf package/lean/luci-app-adguardhome
-git clone git://github.com/leshanydy2022/luci-app-adguardhome.git package/lean/luci-app-adguardhome
-if [ $? -eq 0 ]; then
-    echo "luci-app-adguardhome 安装成功"
-else
-    echo "错误: luci-app-adguardhome 安装失败"
-fi
-
-# 更新 adguardhome 核心
-echo "正在更新 adguardhome 核心..."
-rm -rf feeds/packages/net/adguardhome
-git clone git://github.com/leshanydy2022/adguardhome.git feeds/packages/net/adguardhome
-if [ $? -eq 0 ]; then
-    echo "adguardhome 核心更新成功"
-else
-    echo "错误: adguardhome 核心更新失败"
 fi
 
 # 安装uugamebooster
